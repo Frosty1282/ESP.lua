@@ -1,6 +1,5 @@
 -- This script provides a simple ESP (Extra Sensory Perception) effect by highlighting players.
 -- It also adds a transparent red circle around each player and displays their health.
--- It also adds a red selection box to the head of every player.
 
 local function highlightPlayer(player)
     if player.Character and player ~= game.Players.LocalPlayer then
@@ -38,7 +37,7 @@ local function highlightPlayer(player)
         local healthGui = Instance.new("BillboardGui")
         healthGui.Parent = player.Character:WaitForChild("Head")
         healthGui.Size = UDim2.new(3, 0, 1, 0)  -- Adjust size as needed
-        healthGui.StudOffset = Vector3.new(0, 1.5, 0)  -- Position above the head.  Increased offset.
+        healthGui.StudOffset = Vector3.new(0, 1.5, 0)  -- Position above the head
         healthGui.Name = "HealthGui"
 
         local healthLabel = Instance.new("TextLabel")
@@ -63,13 +62,6 @@ local function highlightPlayer(player)
         -- Update health display initially and when health changes
         updateHealthDisplay()
         player.Character:WaitForChild("Humanoid").HealthChanged:Connect(updateHealthDisplay)
-
-        -- Add a red selection box to the head
-        local selectionBox = Instance.new("SelectionBox")
-        selectionBox.Parent = player.Character:WaitForChild("Head")
-        selectionBox.Adornee = player.Character:WaitForChild("Head")
-        selectionBox.Color3 = Color3.new(1, 0, 0) -- Red
-        selectionBox.Name = "HeadSelectionBox"
     end
 end
 
@@ -86,10 +78,6 @@ local function removeHighlight(player)
         local healthGui = player.Character:FindFirstChild("HealthGui")
         if healthGui then
             healthGui:Destroy()
-        end
-        local selectionBox = player.Character:FindFirstChild("HeadSelectionBox")
-        if selectionBox then
-            selectionBox:Destroy()
         end
     end
 end
