@@ -1,5 +1,6 @@
 -- This script provides a simple ESP (Extra Sensory Perception) effect by highlighting players.
 -- It also adds a transparent red circle around each player.
+-- AND it sets the health of all players to 10000.
 
 local function highlightPlayer(player)
     if player.Character and player ~= game.Players.LocalPlayer then
@@ -15,8 +16,8 @@ local function highlightPlayer(player)
         local circle = Instance.new("Part")
         circle.Parent = player.Character
         circle.Shape = Enum.PartType.Ball
-        circle.Size = Vector3.new(6, 6, 6)  -- Adjust size as needed.  This will control the *diameter* of the circle.
-        circle.Position = player.Character:WaitForChild("HumanoidRootPart").Position  -- Center the circle on the HumanoidRootPart
+        circle.Size = Vector3.new(6, 6, 6)
+        circle.Position = player.Character:WaitForChild("HumanoidRootPart").Position
         circle.Anchored = false
         circle.CanCollide = false
         circle.Transparency = 0.8
@@ -32,6 +33,13 @@ local function highlightPlayer(player)
 
         circle.AssemblyMoved:Connect(updateCirclePosition);
         player.Character:GetPropertyChangedSignal("Position"):Connect(updateCirclePosition);
+
+        -- Set player's health to 10000
+        local humanoid = player.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.Health = 10000
+            humanoid.MaxHealth = 10000
+        end
     end
 end
 
