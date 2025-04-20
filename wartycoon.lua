@@ -1,6 +1,5 @@
 -- This script provides a simple ESP (Extra Sensory Perception) effect by highlighting players.
 -- It also adds a transparent red circle around each player.
--- AND it sets the health of all players to 10000.
 
 local function highlightPlayer(player)
     if player.Character and player ~= game.Players.LocalPlayer then
@@ -33,13 +32,6 @@ local function highlightPlayer(player)
 
         circle.AssemblyMoved:Connect(updateCirclePosition);
         player.Character:GetPropertyChangedSignal("Position"):Connect(updateCirclePosition);
-
-        -- Set player's health to 10000
-        local humanoid = player.Character:FindFirstChild("Humanoid")
-        if humanoid then
-            humanoid.Health = 10000
-            humanoid.MaxHealth = 10000
-        end
     end
 end
 
