@@ -1,4 +1,5 @@
 -- This script provides a simple ESP (Extra Sensory Perception) effect by highlighting players.
+-- It now refreshes the ESP every 3 seconds.
 
 local function highlightPlayer(player)
     if player.Character and player ~= game.Players.LocalPlayer then
@@ -21,10 +22,24 @@ local function removeHighlight(player)
     end
 end
 
+local function refreshESP()
+    -- Remove all existing highlights
+    for _, player in pairs(game.Players:GetPlayers()) do
+        removeHighlight(player)
+    end
+
+    -- Apply highlights to all current players
+    for _, player in pairs(game.Players:GetPlayers()) do
+        highlightPlayer(player)
+    end
+end
+
+-- Initial application of ESP
 for _, p in pairs(game.Players:GetPlayers()) do
     highlightPlayer(p)
 end
 
+-- Connect to player events
 game.Players.PlayerAdded:Connect(function(p)
     p.CharacterAdded:Connect(function(c)
         wait(0.2)
@@ -41,3 +56,10 @@ game.Players.PlayerAdded:Connect(function(p)
         highlightPlayer(p)
     end)
 end)
+
+-- Refresh the ESP every 3 seconds
+while true do
+    wait(3)
+    refreshESP()
+end
+
