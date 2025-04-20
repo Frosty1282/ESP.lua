@@ -38,7 +38,7 @@ local function highlightPlayer(player)
         local healthGui = Instance.new("BillboardGui")
         healthGui.Parent = player.Character:WaitForChild("Head")
         healthGui.Size = UDim2.new(3, 0, 1, 0)  -- Adjust size as needed
-        healthGui.StudOffset = Vector3.new(0, 1.5, 0)  -- Position above the head
+        healthGui.StudOffset = Vector3.new(0, 1.5, 0)  -- Position above the head.  Increased offset.
         healthGui.Name = "HealthGui"
 
         local healthLabel = Instance.new("TextLabel")
